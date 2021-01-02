@@ -49,6 +49,7 @@ def processRequest(req):
 	   	no_year=2020-int(modelyear)
 	   	Present_Price= result.get("outputContexts")[2].get("parameters").get("price")
 	   	Kms_Driven= result.get("outputContexts")[2].get("parameters").get("kilometer")
+	   	Kms_Driven2=np.log(Kms_Driven)
 	   	fueltype= result.get("outputContexts")[2].get("parameters").get("fueltype")
 	   	transmission= result.get("outputContexts")[2].get("parameters").get("transmission")
 	  
@@ -72,7 +73,11 @@ def processRequest(req):
 	   	    Transmission_Manual=0;
 	   	print ('owner is ' + str(Owner) )
 	   	
-	   	fulfillmentText= "The Iris type seems to be..   !"
+	   	
+	   	prediction=model.predict([[Present_Price,Kms_Driven2,Owner,Year,Fuel_Type_Diesel,Fuel_Type_Petrol,Seller_Type_Individual,Transmission_Mannual]])
+	   	output=round(prediction[0],2)
+	   	
+	   	fulfillmentText= "You Can Sell The Car at {}".format(output)
 	   	return {
             "fulfillmentText": fulfillmentText
         }
@@ -81,16 +86,7 @@ def processRequest(req):
                 
     #user_says=result.get("queryText")
     #log.write_log(sessionID, "User Says: "+user_says)
-    parameters = result.get("parameters")
-    Petal_length=parameters.get("number")
-    Petal_width = parameters.get("number1")
-    Sepal_length=parameters.get("number2")
-    Sepal_width=parameters.get("number3")
-    int_features = [Petal_length,Petal_width,Sepal_length,Sepal_width]
     
-    final_features = [np.array(int_features)]
-	 
-    intent = result.get("intent").get('displayName')
     
        
 if __name__ == '__main__':
