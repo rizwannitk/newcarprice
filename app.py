@@ -46,7 +46,7 @@ def processRequest(req):
 	   	Owner = result.get("outputContexts")[2].get("parameters").get("owner")
 	   	dealer= result.get("outputContexts")[2].get("parameters").get("dealer")
 	   	modelyear= result.get("outputContexts")[2].get("parameters").get("modelyear")
-	   	no_year=2020-int(modelyear)
+	   	Year=2020-int(modelyear)
 	   	Present_Price= result.get("outputContexts")[2].get("parameters").get("price")
 	   	Kms_Driven= result.get("outputContexts")[2].get("parameters").get("kilometer")
 	   	Kms_Driven2=np.log(Kms_Driven)
