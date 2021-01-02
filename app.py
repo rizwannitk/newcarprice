@@ -7,7 +7,7 @@ from logging.handlers import RotatingFileHandler
 from flask_cors import cross_origin
 
 app = Flask(__name__)
-model = pickle.load(open('rf.pkl', 'rb'))
+model = pickle.load(open('random_forest_regression_model.pkl', 'rb'))
 
 @app.route('/')
 def hello():
@@ -92,27 +92,7 @@ def processRequest(req):
 	 
     intent = result.get("intent").get('displayName')
     
-    if (intent=='irisdata'):
-        prediction = model.predict(final_features)
-    
-        output = round(prediction[0], 2)
-    
-    	
-        if(output==0):
-            flowr = 'Setosa'
-    
-        if(output==1):
-            flowr = 'Versicolour'
-        
-        if(output==2):
-            flowr = 'Virginica'
        
-        fulfillmentText= "The Iris type seems to be..  {} !".format(flowr)
-        #log.write_log(sessionID, "Bot Says: "+fulfillmentText)
-        return {
-            "fulfillmentText": fulfillmentText
-        }
-	       
 if __name__ == '__main__':
     app.run()
 #if __name__ == '__main__':
