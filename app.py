@@ -74,7 +74,7 @@ def processRequest(req):
 	   	print ('owner is ' + str(Owner) )
 	   	
 	   	
-	   	prediction=model.predict([[Present_Price,Kms_Driven2,Owner,Year,Fuel_Type_Diesel,Fuel_Type_Petrol,Seller_Type_Individual,Transmission_Mannual]])
+	   	prediction=model.predict([[Present_Price,Kms_Driven2,Owner,Year,Fuel_Type_Diesel,Fuel_Type_Petrol,Seller_Type_Individual,Transmission_Manual]])
 	   	output=round(prediction[0],2)
 	   	
 	   	fulfillmentText= "You Can Sell The Car at {}".format(output)
